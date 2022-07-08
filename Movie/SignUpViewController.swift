@@ -34,7 +34,7 @@ class SignUpViewController: UIViewController {
         someSwitch.thumbTintColor = .white
         
         emailTextFieldDesign()
-        passwordTextFieldDesign(passwordTextField, "비밀번호", .gray, .systemFont(ofSize: 15))
+        passwordTextFieldDesign(passwordTextField, "비밀번호", .white, .systemFont(ofSize: 15))
         nicknameTextFieldDesign()
         locationTextFieldDesign()
         recommendTextFieldDesign()
@@ -51,14 +51,15 @@ class SignUpViewController: UIViewController {
         emailTextField.font = UIFont.systemFont(ofSize: 15)
     }
     
-    func passwordTextFieldDesign(_ TextFieldName: UITextField, _ TextField내용: String, _ TextFieldColor: UIColor, _ TextFieldFont: UIFont) {
+    func passwordTextFieldDesign(_ TextFieldName: UITextField, _ TextFieldLabel: String, _ TextFieldColor: UIColor, _ TextFieldFont: UIFont) {
         
-        TextFieldName.attributedPlaceholder = NSAttributedString(string: TextField내용, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-        TextFieldName.isSecureTextEntry = true
+        TextFieldName.attributedPlaceholder = NSAttributedString(string: TextFieldLabel, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+        TextFieldName.textContentType = .oneTimeCode
         TextFieldName.keyboardType = .default
+        TextFieldName.isSecureTextEntry = true
         TextFieldName.textColor = TextFieldColor
         TextFieldName.textAlignment = .center
-        TextFieldName.backgroundColor = TextFieldColor
+        TextFieldName.backgroundColor = .gray
         TextFieldName.borderStyle = .roundedRect
         TextFieldName.font = TextFieldFont
     
@@ -111,9 +112,11 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func registerButtonClicked(_ sender: UIButton) {
-
+        
+        if passwordTextField.text!.isEmpty || passwordTextField.text!.count < 6 {
+            print("비밀번호를 입력해주세요.")
         }
         
         
     }
-
+}
